@@ -12,6 +12,7 @@ RM := rm -rf
 -include sources.mk
 -include synergy/ssp/src/driver/r_ioport/subdir.mk
 -include synergy/ssp/src/driver/r_icu/subdir.mk
+-include synergy/ssp/src/driver/r_gpt/subdir.mk
 -include synergy/ssp/src/driver/r_fmi/subdir.mk
 -include synergy/ssp/src/driver/r_elc/subdir.mk
 -include synergy/ssp/src/driver/r_cgc/hw/subdir.mk
@@ -54,7 +55,7 @@ all: IRQ.elf secondary-outputs
 IRQ.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C Linker'
-	$(file > IRQ.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\SE_01\\e2_studio\\workspace1\\IRQ\\script\\S7G2.ld" -Xlinker --gc-sections -L "C:\\Users\\SE_01\\e2_studio\\workspace1\\IRQ\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"IRQ.map" --specs=nano.specs --specs=rdimon.specs -o "IRQ.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
+	$(file > IRQ.elf.in,-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\\Users\\SE_01\\git\\Proyecto_Integrador1\\IRQ\\script\\S7G2.ld" -Xlinker --gc-sections -L "C:\\Users\\SE_01\\git\\Proyecto_Integrador1\\IRQ\\synergy\\ssp\\src\\bsp\\cmsis\\DSP_Lib\\cm4_gcc" -Wl,-Map,"IRQ.map" --specs=nano.specs --specs=rdimon.specs -o "IRQ.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
 	arm-none-eabi-gcc @"IRQ.elf.in"
 	@echo 'Finished building target: $@'
 	@echo ' '
